@@ -8,7 +8,7 @@ public class MyClassLoader extends ClassLoader {
     public static void main(String[] args) throws ClassNotFoundException, NoSuchMethodException, IllegalAccessException, InstantiationException, InvocationTargetException {
         Class<?> tclass = new MyClassLoader().findClass("Hello");
         Method method = tclass.getMethod("hello");
-        method.invoke((Object) tclass.newInstance());
+        method.invoke(tclass.newInstance());
     }
 
     @Override
