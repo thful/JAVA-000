@@ -14,12 +14,24 @@ public class HomeWork {
     }
 
     // 入口
-    public static void main(String[] args) {
-
+    public static void main(String[] args) throws Exception {
+        System.out.println(test1());
+        System.out.println(test2());
+        System.out.println(test3());
+        System.out.println(test4());
+        System.out.println(test5());
+        System.out.println(test6());
+        System.out.println(test7());
+        System.out.println(test8());
+        System.out.println(test9());
+        System.out.println(test10());
+        System.out.println(test11());
+        System.out.println(test12());
+        System.out.println(test13());
     }
 
     // 1 通过Runnable Join子线程 等待结果之时得到结果
-    public AtomicInteger test1() throws InterruptedException {
+    public static AtomicInteger test1() throws InterruptedException {
         AtomicInteger sum = new AtomicInteger();
         Runnable run = new Runnable() {
             @Override
@@ -34,7 +46,7 @@ public class HomeWork {
     }
 
     // 2 通过Thread Join子线程 等待结果之时得到结果
-    public AtomicInteger test2() throws InterruptedException {
+    public static AtomicInteger test2() throws InterruptedException {
         AtomicInteger sum = new AtomicInteger();
         Thread t = new Thread(() -> {
             sum.set(fibo(fibonum));
@@ -45,7 +57,7 @@ public class HomeWork {
     }
 
     // 3 通过sleep和同步块控制子线程获取锁 子线程结束后 主线程获取锁的结果
-    public AtomicInteger test3() throws InterruptedException {
+    public static AtomicInteger test3() throws InterruptedException {
         Object obj = new Object();
         AtomicInteger sum = new AtomicInteger();
         Thread t = new Thread(() -> {
@@ -61,7 +73,7 @@ public class HomeWork {
     }
 
     // 4 通过同步块与wait控制主线程等待子线程计算出结果
-    public AtomicInteger test4() throws InterruptedException {
+    public static AtomicInteger test4() throws InterruptedException {
         Object obj = new Object();
         AtomicInteger sum = new AtomicInteger();
         Thread t = new Thread(() -> {
@@ -78,7 +90,7 @@ public class HomeWork {
     }
 
     // 5 通过ReentrantLock和Condition控制主线程等待子线程计算出结果
-    public AtomicInteger test5() throws InterruptedException {
+    public static AtomicInteger test5() throws InterruptedException {
         ReentrantLock lock = new ReentrantLock();
         Condition condition = lock.newCondition();
         AtomicInteger sum = new AtomicInteger();
@@ -100,7 +112,7 @@ public class HomeWork {
     }
 
     // 6 通过CountDownLatch控制主线程等待子线程计算出结果
-    public AtomicInteger test6() throws InterruptedException {
+    public static AtomicInteger test6() throws InterruptedException {
         CountDownLatch countDownLatch = new CountDownLatch(1);
         AtomicInteger sum = new AtomicInteger();
         Thread t = new Thread(() -> {
@@ -117,7 +129,7 @@ public class HomeWork {
     }
 
     // 7 子线程计算完成主线程互相等待 主线程获取结果后退出
-    public AtomicInteger test7() throws BrokenBarrierException, InterruptedException {
+    public static AtomicInteger test7() throws BrokenBarrierException, InterruptedException {
         CyclicBarrier cyclicBarrier = new CyclicBarrier(2);
         AtomicInteger sum = new AtomicInteger();
         Thread t = new Thread(() -> {
@@ -134,7 +146,7 @@ public class HomeWork {
     }
 
     // 8 主线程先park 通过CyclicBarrier的barrierAction唤醒主线程 然后获取结果
-    public AtomicInteger test8() {
+    public static AtomicInteger test8() {
         Thread current = Thread.currentThread();
         CyclicBarrier cyclicBarrier = new CyclicBarrier(1, () -> {
             LockSupport.unpark(current);
@@ -144,7 +156,7 @@ public class HomeWork {
         Thread t = new Thread(() -> {
             sum.set(fibo(fibonum));
             try {
-                cyclicBarrier.await()
+                cyclicBarrier.await();
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -158,7 +170,7 @@ public class HomeWork {
     // 9 设置一个volatile变量 主线程遍历标志 CyclicBarrier的barrierAction改变计算状态 主线程可以获取结果了
     static volatile boolean over = false;
 
-    public AtomicInteger test9() {
+    public static AtomicInteger test9() {
         CyclicBarrier cyclicBarrier = new CyclicBarrier(1, () -> {
             over = true;
         });
@@ -180,7 +192,7 @@ public class HomeWork {
 
     // 10 初始化semaphore 主线程获取阻塞
     // 子线程计算结束后 释放一个资源 此时主线程可以获得许可然后获取计算结果
-    public AtomicInteger test10() throws InterruptedException {
+    public static AtomicInteger test10() throws InterruptedException {
         Semaphore semaphore = new Semaphore(0);
         AtomicInteger sum = new AtomicInteger();
         Thread t = new Thread(() -> {
@@ -198,7 +210,7 @@ public class HomeWork {
      * 主线程使用take出队 子线程offer入队
      * 如果队列为空则take会阻塞 会等待子线程把结果offer进队列 主线程才会获取到结果
      */
-    public Integer test11() throws InterruptedException {
+    public static Integer test11() throws InterruptedException {
         ArrayBlockingQueue<Integer> queue = new ArrayBlockingQueue<>(1);
         Thread t = new Thread(() -> {
             int sum = fibo(fibonum);
@@ -210,7 +222,7 @@ public class HomeWork {
     }
 
     // 12 利用FutureTask把执行体包装成有返回值的任务 子线程启动后 主线程中get获取结果 会阻塞等待到获取到结果
-    public Integer test12() throws ExecutionException, InterruptedException {
+    public static Integer test12() throws ExecutionException, InterruptedException {
         FutureTask<Integer> futureTask = new FutureTask<>(new Callable<Integer>() {
             @Override
             public Integer call() throws Exception {
@@ -223,7 +235,7 @@ public class HomeWork {
     }
 
     // 13 线程池
-    public Integer test13() throws ExecutionException, InterruptedException {
+    public static Integer test13() throws ExecutionException, InterruptedException {
         Callable<Integer> callable = new Callable<Integer>() {
             @Override
             public Integer call() throws Exception {
