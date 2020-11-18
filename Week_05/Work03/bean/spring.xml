@@ -1,0 +1,9 @@
+<beans>
+    <bean id="xml" class="Student">
+        <property name="name" value="xml"></property>
+        <property name="gender" value="男"></property>
+    </bean>
+
+    <bean id="studentFactory" class="StudentFactory"></bean>
+    <bean id="factory" factory-bean="studentFactory" factory-method="create"></bean>
+</beans>

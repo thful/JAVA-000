@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: org.springframework.boot:spring-boot-starter:unknown">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../../Softs/Maven/repository/org/springframework/boot/spring-boot-starter/unknown/spring-boot-starter-unknown.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$PROJECT_DIR$/../../Softs/Maven/repository/org/springframework/boot/spring-boot-starter/unknown/spring-boot-starter-unknown-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/../../Softs/Maven/repository/org/springframework/boot/spring-boot-starter/unknown/spring-boot-starter-unknown-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
